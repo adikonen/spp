@@ -12,7 +12,7 @@ class Database
      * @param PDOStatement|bool $stmt
      * statement dari hasil preparedStatement PDO $conn
      */
-    protected $stmt;
+    protected PDOStatement $stmt;
 
     public function __construct()
     {
@@ -129,6 +129,16 @@ class Database
         
         Flasher::set('danger', $onFailureMessage, 404);
         return redirect('redirector/index');
+    }
+
+    /**
+     * mendapatkan primary key terahkir kali
+     * @return int
+     */
+    public function lastInsertId()
+    {
+        $this->execute();
+        return $this->conn->lastInsertId();
     }
 
     /**

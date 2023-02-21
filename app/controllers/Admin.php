@@ -118,15 +118,25 @@ class Admin extends Controller
     public function pengguna_destroy($idPengguna)
     {
         $db = new Database();
+        $pengguna = $db->query('SELECT * FROM pengguna WHERE id_pengguna = :id_pengguna')
+            ->bind(':id_pengguna',$idPengguna)
+            ->first(); 
         try {
             $db->query('DELETE FROM pengguna WHERE id_pengguna = :id_pengguna')
                 ->bind(':id_pengguna', $idPengguna)
                 ->execute();
         } catch (Exception $error) {
-            Flasher::set('danger', 'Gagal menghapus petugas!');
+            Flasher::set('danger', 'Gagal menghapus pengguna!');
             logging_error('ERROR DELETE PETUGAS, MESSAGE:'.$error->getMessage());
             return redirect('admin/petugas');
         }
+
+        Flasher::set('success', 'Berhasil menghapus pengguna!');
+        
+        if ($pengguna['role'] === SISWA_ROLE) {
+            return redirect('admin/siswa');
+        }
+
         return redirect('admin/petugas');
     }
 
@@ -164,7 +174,7 @@ class Admin extends Controller
             ->bind(':kompetensi_keahlian', $_POST['kompetensi_keahlian'])
             ->execute();
         
-        Flasher::set('danger', 'Berhasil membuat kelas!');
+        Flasher::set('success', 'Berhasil membuat kelas!');
         return redirect('admin/kelas');
     }
 
@@ -220,7 +230,7 @@ class Admin extends Controller
             ->firstOrFail('Pembayaran tidak ditemukan!');
 
         $data = ['pembayaran' => $pembayaran];
-        return $this->render('admin/petugas/edit', $data);
+        return $this->render('admin/pembayaran/edit', $data);
     }
 
     public function pembayaran_store()
@@ -263,49 +273,143 @@ class Admin extends Controller
         Flasher::set('success', 'Berhasil menghapus pembayaran');
         return redirect('admin/pembayaran');
     }
-    
-    /**
-     * menampilkan history transaksi
-     */
-    public function transaksi($transaksi_filter_type = null, $filter_value = null)
+
+    public function siswa()
     {
         $db = new Database();
-        $query = 'SELECT * FROM pembayaran_transaksi_siswa_view';
+        $all_siswa = $db->query('SELECT * FROM siswa_kelas_view')->get();
+        $data = ['all_siswa' => $all_siswa];
 
-        if ($transaksi_filter_type != null) {
-            // $transaksi_filter_type bisa saja berisi nilai bahaya oleh karena itu harus dicek
-            if (! TransaksiHelper::isFilterTypeAllowed($transaksi_filter_type)) {
-                dd([$transaksi_filter_type, $filter_value]);
-            } 
-            $query .= " WHERE $transaksi_filter_type = :filter_value";
-        }  
-
-        $all_transaksi = $db->query($query)
-            ->when($transaksi_filter_type != null, fn(Database $db) => $db->bind(':filter_value', $filter_value))
-            ->get();
-
-        $data = ['all_transaksi' => $all_transaksi];
-
-        $this->view('templates/header');
-        $this->view('admin/transaksi/index', $data);
-        $this->view('templates/footer');
+        return $this->render('admin/siswa/index',$data);
     }
 
-    public function transaksi_create()
+    public function siswa_create()
     {
         $db = new Database();
-        $data = TransaksiHelper::getReferenceData($db);
+        $all_kelas = $db->query('SELECT * FROM kelas')->get();
+        $all_pembayaran = $db->query('SELECT * FROM pembayaran')->get();
         
-        $this->view('templates/header');
-        $this->view('admin/transaksi/entry', $data);
-        $this->view('templates/footer');
+        $data = [
+            'all_kelas'      => $all_kelas,
+            'all_pembayaran' => $all_pembayaran
+        ];
+
+        return $this->render('admin/siswa/create', $data);
     }
 
-    public function transaksi_store()
+    public function siswa_edit($idPengguna)
     {
         $db = new Database();
-        $db->query('CALL storeTransaksi(:)');
-
+        $siswa = $db->query('SELECT * FROM pengguna_siswa_view WHERE id_pengguna = :id_pengguna')
+            ->bind(':id_pengguna', $idPengguna)
+            ->firstOrFail('Gagal menemukan siswa!');
         
+        $all_kelas = $db->query('SELECT * FROM kelas')->get();
+        $all_pembayaran = $db->query('SELECT * FROM pembayaran')->get();
+
+        $data = [
+            'siswa'             => $siswa,
+            'all_kelas'         => $all_kelas,
+            'all_pembayaran'    => $all_pembayaran
+        ];
+
+        return $this->render('admin/siswa/edit',$data);
+    }
+
+    public function siswa_store()
+    {
+        $db = new Database();
+        $db->beginTransaction();
+
+        $username = $_POST['nis'];
+        try {
+            $db->query('CALL storePengguna(:username, :password,:role)')
+                ->bind(':username', $username)
+                ->bind(':password', $_POST['password'])
+                ->bind(':role', SISWA_ROLE)
+                ->execute();
+            
+            $pengguna = $db->query('CALL findPenggunaByUsernameAndPassword(:username,:password)')
+                ->bind(':username',$username)
+                ->bind(':password',$_POST['password'])
+                ->first();
+
+            $idPengguna = $pengguna['id_pengguna'];
+
+            $insertQuery = 'INSERT INTO siswa (nis,nisn,nama,alamat,telepon,id_pengguna,id_kelas,id_pembayaran) VALUES(:nis,:nisn,:nama,:alamat,:telepon,:id_pengguna,:id_kelas,:id_pembayaran)';
+            $db->query($insertQuery)
+                ->bind(':nis', $_POST['nis'])
+                ->bind(':nisn',$_POST['nisn'])
+                ->bind(':nama',$_POST['nama'])
+                ->bind(':alamat',$_POST['alamat'])
+                ->bind(':telepon',$_POST['telepon'])
+                ->bind(':id_kelas',$_POST['id_kelas'])
+                ->bind(':id_pembayaran',$_POST['id_pembayaran'])
+                ->bind(':id_pengguna',$idPengguna)
+                ->execute();
+        
+        } catch (Exception $error) {
+            logging_error('ERROR INSERT SISWA MESSAGE:'.$error->getMessage());
+            $db->rollback();
+            Flasher::set('danger','Gagal membuat siswa');
+            return redirect('admin/siswa');
+        }
+
+        $db->commit();
+        Flasher::set('success', 'Berhasil membuat siswa');
+        return redirect('admin/siswa');
+    }
+
+    public function siswa_update($idPengguna)
+    {
+        $db = new Database();
+        $db->beginTransaction();
+
+        $username = $_POST['nis'];
+        try {
+            $db->query('CALL updatePenggunaById(:username, :password, :role, :id_pengguna)')
+                ->bind(':username', $username)
+                ->bind(':password', $_POST['password'])
+                ->bind(':role', SISWA_ROLE)
+                ->bind(':id_pengguna', $idPengguna)
+                ->execute();
+
+            $updateQuery = 'UPDATE siswa SET
+                nama = :nama,
+                nis = :nis,
+                nisn = :nisn,
+                alamat = :alamat,
+                telepon = :telepon,
+                id_kelas = :id_kelas,
+                id_pembayaran = :id_pembayaran 
+                WHERE id_pengguna = :id_pengguna
+            ';
+
+            $count = $db->query($updateQuery)
+                ->bind(':nama', $_POST['nama'])
+                ->bind(':nis', $_POST['nis'])
+                ->bind(':nisn', $_POST['nisn'])
+                ->bind(':alamat',$_POST['alamat'])
+                ->bind(':telepon',$_POST['telepon'])
+                ->bind(':id_kelas', $_POST['id_kelas'])
+                ->bind(':id_pembayaran',$_POST['id_pembayaran'])
+                ->bind(':id_pengguna' ,$idPengguna)
+                ->rowCount();
+
+        } catch (Exception $error) {
+            logging_error('ERROR UPDATE SISWA, MESSAGE:'.$error->getMessage());
+            $db->rollback();
+            Flasher::set('danger', 'Gagal mengupdate siswa!');
+            return redirect('admin/siswa');
+        }
+
+        $db->commit();
+        Flasher::set('success','Berhasil mengupdate siswa!');
+        return redirect('admin/siswa');
+    }
+
+    public function transaksi()
+    {
+
     }
 }

@@ -32,6 +32,8 @@ class Flasher
             echo <<<html
                 <div class="alert alert-$type">$message</div>
             html;
+
+            unset($_SESSION['flash']);
         }
     }
 

@@ -349,3 +349,4 @@
                 </nav>
                 <!-- End of Topbar -->
                 <div class="container-fluid">
+                    <?php Flasher::flash();?>

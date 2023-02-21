@@ -10,7 +10,7 @@
                 <label for="nominal" class="form-label text-capitalize">Nominal</label>
                 <input type="number" name="nominal" class="form-control" id="nominal" value="<?= e($pembayaran['nominal'])?>">
             </div>
-            <div class="mb-1">
+            <div class="mb-3">
                 <label for="tahun_ajaran" class="form-label text-capitalize">tahun ajaran</label>
                 <input type="number" name="tahun_ajaran" class="form-control" id="tahun_ajaran" value="<?= e($pembayaran['tahun_ajaran'])?>">
             </div>
