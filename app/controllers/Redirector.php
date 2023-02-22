@@ -7,13 +7,16 @@ class Redirector extends Controller
         $user = getLoginAccount();
 
         if ($user == null) {
-            echo 'guest';
-            die;
+            Flasher::set('danger', 'Mohon Login terlebih dahulu!');
+            return redirect('login');
         } 
 
-        $level = $user['level'];
-        if ($level == 1) {
-            echo 'admin';
-        } 
+        $role = $user['role'];
+
+        if ($role === SISWA_ROLE) {
+            return redirect('siswa');
+        }
+        
+        return redirect('admin');
     }
 }

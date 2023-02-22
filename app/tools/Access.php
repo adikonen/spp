@@ -15,7 +15,7 @@ class Access
         } 
         
         if ($isForbidden) {
-            return redirectToRedirector();
+            return redirect('redirector/index');
         }
     }
 
@@ -23,7 +23,7 @@ class Access
     {
         $user = getLoginAccount();
         if ($user != null) {
-            return redirectToRedirector();
+            return redirect('redirector/index');
         }
     }
 
@@ -31,7 +31,7 @@ class Access
     {
         $user = getLoginAccount();
         if ($user == null) {
-            return redirectToRedirector();
+            return redirect('redirector/index');
         }   
     }
 }

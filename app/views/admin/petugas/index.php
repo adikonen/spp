@@ -1,7 +1,7 @@
 <div>
     <div class="p-3 d-flex justify-content-between">
         <h4 class="text-gray-900">Daftar Petugas</h4>
-        <a href="<?= BASE_URL?>/admin/petugas_create" class="btn btn-success">Tambah Petugas</a>
+        <a href="<?= BASE_URL?>/admin_petugas/create" class="btn btn-success">Tambah Petugas</a>
     </div>
     <div class="card p-3">
         <div class="table-responsive">
@@ -20,8 +20,8 @@
                         <td><?= e($petugas['username'])?></td>
                         <td><?= e($petugas['nama_petugas'])?></td>
                         <td>
-                            <a href="<?= BASE_URL?>/admin/petugas_edit/<?= e($petugas['id_pengguna'])?>" class="btn btn-warning">Edit</a>
-                            <a href="<?= BASE_URL?>/admin/pengguna_destroy/<?= e($petugas['id_pengguna'])?>" class="btn btn-danger">Hapus</a>
+                            <a href="<?= BASE_URL?>/admin_petugas/edit/<?= e($petugas['id_pengguna'])?>" class="btn btn-warning">Edit</a>
+                            <a href="<?= BASE_URL?>/admin_pengguna/destroy/<?= e($petugas['id_pengguna'])?>" class="btn btn-danger">Hapus</a>
                         </td>
                     </tr>
                     <?php endforeach;?>

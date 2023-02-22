@@ -13,3 +13,5 @@ CONST SISWA_ROLE = 3;
 
 CONST APP_NAME = 'SPP Skensa';
 CONST ERROR_LOG_PATH = "D:/Installation/laragon/www/spp/public/logs/error.log";
+
+date_default_timezone_set('Asia/Makassar');

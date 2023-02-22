@@ -11,5 +11,10 @@ class Siswa
         Access::for(SISWA_ROLE);
     }
 
+    public function index()
+    {
+        
+    }
+
     
 }

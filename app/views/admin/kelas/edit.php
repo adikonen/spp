@@ -5,7 +5,7 @@
         <h4 class="text-capitalize">Edit kelas</h4>
     </div>
     <div class="card p-3">
-        <form action="<?= BASE_URL?>/admin/kelas_update/<?= e($kelas['id_kelas'])?>" method="post">
+        <form action="<?= BASE_URL?>/admin_kelas/update/<?= e($kelas['id_kelas'])?>" method="post">
             <div class="mb-3">
                 <label for="nama_kelas" class="form-label text-capitalize">Nama Kelas</label>
                 <input type="text" name="nama_kelas" class="form-control" id="nama_kelas" value="<?= e($kelas['nama_kelas'])?>">

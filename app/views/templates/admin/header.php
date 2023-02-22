@@ -76,8 +76,8 @@
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Jenis Pengguna</h6>
-                        <a class="collapse-item" href="<?=BASE_URL?>/admin/petugas">Petugas</a>
-                        <a class="collapse-item" href="<?= BASE_URL?>/admin/siswa">Siswa</a>
+                        <a class="collapse-item" href="<?=BASE_URL?>/admin_petugas">Petugas</a>
+                        <a class="collapse-item" href="<?= BASE_URL?>/admin_siswa">Siswa</a>
                     </div>
                 </div>
             </li>
@@ -93,8 +93,8 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Daftar:</h6>
-                        <a class="collapse-item" href="<?= BASE_URL?>/admin/pembayaran">Pembayaran</a>
-                        <a class="collapse-item" href="<?= BASE_URL?>/admin/kelas">Kelas</a>
+                        <a class="collapse-item" href="<?= BASE_URL?>/admin_pembayaran">Pembayaran</a>
+                        <a class="collapse-item" href="<?= BASE_URL?>/admin_kelas">Kelas</a>
                     </div>
                 </div>
             </li>
@@ -317,7 +317,7 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?= e($user['username'])?></span>
                                 <img class="img-profile rounded-circle"
                                     src="<?= BASE_URL?>/img/undraw_profile.svg">
                             </a>

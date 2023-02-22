@@ -46,7 +46,7 @@ $idPembayaran = $siswa['id_pembayaran'] ?? null;
     </select>
 </div>
 <button class="btn btn-primary">Simpan</button>
-<a href="<?= BASE_URL?>/admin/siswa" class="btn btn-secondary">Kembali</a>
+<a href="<?= BASE_URL?>/admin_siswa" class="btn btn-secondary">Kembali</a>
 
 <script>
     $('#showPass').change((e) => {

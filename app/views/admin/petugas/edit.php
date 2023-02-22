@@ -5,7 +5,7 @@
         <h4>Edit Petugas</h4>
     </div>
     <div class="card p-3">
-        <form action="<?= BASE_URL?>/admin/petugas_update/<?= e($petugas['id_pengguna'])?>" method="post">
+        <form action="<?= BASE_URL?>/admin_petugas/update/<?= e($petugas['id_pengguna'])?>" method="post">
             <div class="mb-3">
                 <label for="username" class="form-label">Username</label>
                 <input type="text" name="username" class="form-control" id="username" value="<?= e($petugas['username'])?>">
@@ -20,7 +20,7 @@
                 <input type="text" name="nama_petugas" class="form-control" id="nama_petugas" value="<?= e($petugas['nama_petugas'])?>">
             </div>
             <button class="btn btn-primary">Simpan</button>
-            <a href="<?= BASE_URL?>/admin/petugas" class="btn btn-secondary">Kembali</a>
+            <a href="<?= BASE_URL?>/admin_petugas" class="btn btn-secondary">Kembali</a>
         </form>
     </div>
 </div>

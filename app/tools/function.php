@@ -15,11 +15,46 @@ function dd($var)
     die;
 }
 
+function getBulanOption()
+{
+    return [
+        '1' => 'Januari',
+        '2' => 'Februari',
+        '3' => 'Maret',
+        '4' => 'April',
+        '5' => 'Mei',
+        '6' => 'Juni',
+        '7' => 'Juli',
+        '8' => 'Agustus',
+        '9' => 'September',
+        '10' => 'Oktober',
+        '11' => 'November',
+        '12' => 'Desember',
+    ];
+}
+
 function redirect($path)
 {
     $path = BASE_URL .'/'. trim($path,'/');
     header("Location: $path");
     die;
+}
+
+/**
+ * @param array $data
+ * @return void
+ */
+function login($data) 
+{
+    //username
+    //password
+    //role
+    //dll
+    if (isset($data['password'])) {
+        unset($data['password']);
+    }
+
+    $_SESSION['user'] = $data;
 }
 
 /**
@@ -46,7 +81,46 @@ function login_required()
     $user = getLoginAccount();
 
     if ($user == null) {
-        return redirect('login');
+        return redirect('redirector/index');
+    }
+}
+
+function staff_only()
+{
+    $user = getLoginAccount();
+
+    login_required();
+    if ($user['role'] === SISWA_ROLE) {
+        return redirect('redirector/index');
+    }
+}
+
+function admin_only()
+{
+    $user = getLoginAccount();
+    staff_only();
+
+    if ($user['role'] === PETUGAS_ROLE) {
+        return redirect('redirector/index');
+    }
+}
+
+function siswa_only()
+{
+    $user = getLoginAccount();
+
+    if ($user['role'] !== SISWA_ROLE) {
+        return redirect('redirector/index');
+    }
+    
+}
+
+function guest_only()
+{
+    $user = getLoginAccount();
+    
+    if ($user != null) {
+        return redirect('redirector/index');
     }
 }
 

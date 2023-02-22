@@ -8,7 +8,7 @@ class Controller
      * @param string $view
      * @param array $data
      */
-    public function view($view, $data = []) 
+    protected function view($view, $data = []) 
     {
         require_once "../app/views/$view.php";
     }
