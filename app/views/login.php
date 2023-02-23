@@ -7,7 +7,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>Tiket</title>
+<title><?= e(APP_NAME)?></title>
 <style>
     .bg-login {
       background: url("<?= BASE_URL?>/img/laptop.jpg");
