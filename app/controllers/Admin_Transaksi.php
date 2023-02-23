@@ -48,6 +48,20 @@ class Admin_Transaksi extends AdminController
     public function history($idSiswa)
     {
         $db = new Database();
+        $siswa = $db->query('SELECT * FROM siswa WHERE id_siswa = :id_siswa')
+            ->bind(':id_siswa',$idSiswa)
+            ->firstOrFail('Gagal menemukan siswa!');
+
+        $all_transaksi = $db->query('SELECT * FROM transaksi WHERE id_siswa = :id_siswa ORDER BY tanggal_bayar')
+            ->bind(':id_siswa',$idSiswa)
+            ->get();
+        
+        $data = [
+            'all_transaksi' => $all_transaksi,
+            'siswa' => $siswa
+        ];
+
+        return $this->render("admin/transaksi/history",$data);
     }
 
     public function store($idSiswa, $tahun)
