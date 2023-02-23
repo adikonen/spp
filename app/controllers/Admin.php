@@ -36,7 +36,8 @@ class Admin extends AdminController
         $data = [
             'all_month' => $all_month,
             'annual_earning' => $annual_earning,
-            'count_transaction' => $count_transaction
+            'count_transaction' => $count_transaction,
+            'tahun' => $tahun
         ];
 
         return $this->view('admin/laporan',$data);

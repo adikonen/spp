@@ -60,7 +60,6 @@ class TransaksiHelper
     public function getYearSPP()
     {
         $db = $this->db;
-
         $idSiswa = $this->idSiswa;
         $active = $this->getActiveTahunAjaran($idSiswa);
         $angkatan = $db->query('SELECT angkatan FROM siswa WHERE id_siswa = :id_siswa')
