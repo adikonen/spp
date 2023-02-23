@@ -57,13 +57,7 @@ function getBulanOptionFromJuly()
     ];
 }
 
-/**
- * merender html di folder views/components
- */
-function component($component, $data = [])
-{
-    require "../app/views/components/$view.php";
-}
+
 
 function redirect($path)
 {

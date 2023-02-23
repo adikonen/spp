@@ -24,7 +24,8 @@
                         <td><?= e($siswa['telepon'])?></td>
                         <td><?= e($siswa['nama_kelas'])?></td>
                         <td>
-                          <a href="<?= BASE_URL?>/admin_transaksi/show/<?= e($siswa['id_siswa'])?>/<?= e($siswa['angkatan'])?>" class="btn btn-success">Entry Transaksi</a>
+                          <a href="<?= BASE_URL?>/admin_transaksi/show/<?= e($siswa['id_siswa'])?>/<?= e($siswa['angkatan'])?>" class="btn btn-success">Entry   </a>
+                          <a href="<?= BASE_URL?>/admin_transaksi/history/<?= e($siswa['id_siswa'])?>" class="btn btn-warning">History</a>
                         </td>
                     </tr>
                     <?php endforeach;?>

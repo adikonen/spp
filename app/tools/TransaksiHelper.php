@@ -99,7 +99,7 @@ class TransaksiHelper
         return $db->query('SELECT id_pembayaran FROM pembayaran WHERE tahun_ajaran = :tahun_ajaran')
             ->bind(':tahun_ajaran',$tahunAjaran+1)
             ->flatFirst();
-
     }
 
+   
 }

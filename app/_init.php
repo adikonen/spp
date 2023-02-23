@@ -9,3 +9,4 @@ require_once "tools/Flasher.php";
 require_once "tools/function.php";
 require_once "tools/Access.php";
 require_once "tools/TransaksiHelper.php";
+require_once "tools/ReportHelper.php";

@@ -114,17 +114,7 @@
                     <span>Entry Transaksi</span></a>
             </li>
 
-            <!-- Nav Item - Tables -->
-            <li class="nav-item">
-                <a class="nav-link" href="<?= BASE_URL?>/admin_transaksi">
-                    <i class="fas fa-fw fa-clock"></i>
-                    <span>History Transaksi</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="<?= BASE_URL?>/admin/transaksi_siswa">
-                    <i class="fas fa-fw fa-dollar-sign"></i>
-                    <span>Transaksi Siswa</span></a>
-            </li>
+ 
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
