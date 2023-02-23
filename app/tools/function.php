@@ -15,7 +15,7 @@ function dd($var)
     die;
 }
 
-function getBulanOption()
+function getMonthOption()
 {
     return [
         '1' => 'Januari',
@@ -31,6 +31,32 @@ function getBulanOption()
         '11' => 'November',
         '12' => 'Desember',
     ];
+}
+
+function getBulanOptionFromJuly()
+{
+    return [
+        '7' => 'Juli',
+        '8' => 'Agustus',
+        '9' => 'September',
+        '10' => 'Oktober',
+        '11' => 'November',
+        '12' => 'Desember',
+        '1' => 'Januari',
+        '2' => 'Februari',
+        '3' => 'Maret',
+        '4' => 'April',
+        '5' => 'Mei',
+        '6' => 'Juni',
+    ];
+}
+
+/**
+ * merender html di folder views/components
+ */
+function component($component, $data = [])
+{
+    require "../app/views/components/$view.php";
 }
 
 function redirect($path)

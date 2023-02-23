@@ -64,13 +64,14 @@ class Admin_Siswa extends AdminController
 
             $idPengguna = $pengguna['id_pengguna'];
 
-            $insertQuery = 'INSERT INTO siswa (nis,nisn,nama,alamat,telepon,id_pengguna,id_kelas,id_pembayaran) VALUES(:nis,:nisn,:nama,:alamat,:telepon,:id_pengguna,:id_kelas,:id_pembayaran)';
+            $insertQuery = 'INSERT INTO siswa (nis,nisn,nama,alamat,telepon,angkatan,id_pengguna,id_kelas,id_pembayaran) VALUES(:nis,:nisn,:nama,:alamat,:telepon,:angkatan,:id_pengguna,:id_kelas,:id_pembayaran)';
             $db->query($insertQuery)
                 ->bind(':nis', $_POST['nis'])
                 ->bind(':nisn',$_POST['nisn'])
                 ->bind(':nama',$_POST['nama'])
                 ->bind(':alamat',$_POST['alamat'])
                 ->bind(':telepon',$_POST['telepon'])
+                ->bind(':angkatan',$_POST['angkatan'])
                 ->bind(':id_kelas',$_POST['id_kelas'])
                 ->bind(':id_pembayaran',$_POST['id_pembayaran'])
                 ->bind(':id_pengguna',$idPengguna)
@@ -109,6 +110,7 @@ class Admin_Siswa extends AdminController
                 alamat = :alamat,
                 telepon = :telepon,
                 id_kelas = :id_kelas,
+                angkatan = :angkatan,
                 id_pembayaran = :id_pembayaran 
                 WHERE id_pengguna = :id_pengguna
             ';
@@ -119,6 +121,7 @@ class Admin_Siswa extends AdminController
                 ->bind(':nisn', $_POST['nisn'])
                 ->bind(':alamat',$_POST['alamat'])
                 ->bind(':telepon',$_POST['telepon'])
+                ->bind(':angkatan', $_POST['angkatan'])
                 ->bind(':id_kelas', $_POST['id_kelas'])
                 ->bind(':id_pembayaran',$_POST['id_pembayaran'])
                 ->bind(':id_pengguna' ,$idPengguna)

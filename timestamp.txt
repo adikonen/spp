@@ -1,2 +1,1 @@
-14.40 - 15.15
-17.12 -  
+cek jika data transaksi pada siswa dipilih berjumlah 12 maka ubah pembayaran id pada siswa

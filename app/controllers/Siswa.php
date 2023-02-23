@@ -13,7 +13,16 @@ class Siswa
 
     public function index()
     {
-        
+        $user = getLoginAccount();
+        $id = $user['id_siswa'];
+
+
+        $all_transaksi = $this->model('Siswa_model')->history($id);
+        $data = [
+            'all_transaksi' => $all_transaksi
+        ];
+
+        $this->view('',$data);
     }
 
     

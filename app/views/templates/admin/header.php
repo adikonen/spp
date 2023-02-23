@@ -109,14 +109,14 @@
 
             <!-- Nav Item - Charts -->
             <li class="nav-item">
-                <a class="nav-link" href="<?= BASE_URL?>/admin/transaksi_create">
+                <a class="nav-link" href="<?= BASE_URL?>/admin_transaksi">
                     <i class="fas fa-fw fa-download"></i>
                     <span>Entry Transaksi</span></a>
             </li>
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">
-                <a class="nav-link" href="<?= BASE_URL?>/admin/transaksi">
+                <a class="nav-link" href="<?= BASE_URL?>/admin_transaksi">
                     <i class="fas fa-fw fa-clock"></i>
                     <span>History Transaksi</span></a>
             </li>

@@ -26,6 +26,10 @@ $idPembayaran = $siswa['id_pembayaran'] ?? null;
     <input type="number" name="telepon" id="telepon" class="form-control" value="<?= e($siswa['telepon'] ?? null)?>">
 </div>
 <div class="mb-3">
+    <label for="angkatan" class="form-label">Angkatan</label>
+    <input type="number" name="angkatan" id="angkatan" class="form-control" value="<?= e($siswa['angkatan'] ?? null)?>">
+</div>
+<div class="mb-3">
     <label for="alamat" class="form-label">Alamat</label>
     <input type="text" name="alamat" id="alamat" class="form-control" value="<?= e($siswa['alamat'] ?? null )?>" >
 </div>

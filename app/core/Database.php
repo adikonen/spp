@@ -29,6 +29,14 @@ class Database
     }
 
     /**
+     * menutup koneksi pdo
+     */
+    public function __destruct()
+    {
+        $this->conn = null;
+    }
+
+    /**
      * melakukan bind prepared statement pada variable stmt
      * @param string|int|bool|null $param
      * @param string $value
@@ -53,6 +61,23 @@ class Database
         }
 
         $this->stmt->bindValue($param, $value, $type);
+        return $this;
+    }
+
+    /**
+     * melakukan bind dengan banyak
+     * @param array<string,mixed> $keyValues
+     * penggunaan [
+     *      ':username' => $username,
+     *      ':password' => $password
+     * ]
+     * @return self
+     */
+    public function binds($keyValues)
+    {
+        foreach ($keyValues as $k => $v) {
+            $this->bind($k, $v);
+        }
         return $this;
     }
 
@@ -100,6 +125,26 @@ class Database
     {
         $this->execute();
         return $this->stmt->fetchAll();
+    }
+
+    /**
+     * melakukan fetch column
+     * @return array<mixed>
+     */
+    public function flat()
+    {
+        $this->execute();
+        return $this->stmt->fetchAll(PDO::FETCH_COLUMN);
+    }
+
+    /**
+     * melakukan fetch column namun mengambil nilai pertama saja
+     * @return mixed
+     */
+    public function flatFirst()
+    {
+        $this->execute();
+        return $this->stmt->fetchColumn();
     }
 
     /**
