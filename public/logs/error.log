@@ -1,0 +1,9 @@
+cokkk njingERROR STORE PETUGAS, MESSAGE:SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`spp`.`petugas`, CONSTRAINT `petugas_ibfk_1` FOREIGN KEY (`id_pengguna`) REFERENCES `pengguna` (`id_pengguna`) ON DELETE CASCADE)
+ERROR STORE PETUGAS, MESSAGE:SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'username' cannot be null
+ERROR STORE PETUGAS, MESSAGE:SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'username' cannot be null
+ERROR INSERT SISWA MESSAGE:SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+ERROR STORE PETUGAS, MESSAGE:SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'username' cannot be null
+ERROR UPDATE PETUGAS, MESSAGE:SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'username' cannot be null
+ERROR UPDATE SISWA, MESSAGE:SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'username' cannot be null
+ERROR UPDATE SISWA, MESSAGE:SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'username' cannot be null
+ERROR INSERT SISWA MESSAGE:SQLSTATE[HY000]: General error: 1364 Field 'angkatan' doesn't have a default value
