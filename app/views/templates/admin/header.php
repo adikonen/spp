@@ -114,6 +114,7 @@
                     <span>Entry Transaksi</span></a>
             </li>
 
+<<<<<<< HEAD
             <!-- Nav Item - Tables -->
             <li class="nav-item">
                 <a class="nav-link" href="<?= BASE_URL?>/admin_transaksi">
@@ -125,6 +126,9 @@
                     <i class="fas fa-fw fa-dollar-sign"></i>
                     <span>Transaksi Siswa</span></a>
             </li>
+=======
+ 
+>>>>>>> 4a1e8812b35b96fa2dbab751c73955a7fbe21bc5
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">

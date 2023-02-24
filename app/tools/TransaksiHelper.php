@@ -60,7 +60,6 @@ class TransaksiHelper
     public function getYearSPP()
     {
         $db = $this->db;
-
         $idSiswa = $this->idSiswa;
         $active = $this->getActiveTahunAjaran($idSiswa);
         $angkatan = $db->query('SELECT angkatan FROM siswa WHERE id_siswa = :id_siswa')
@@ -99,7 +98,7 @@ class TransaksiHelper
         return $db->query('SELECT id_pembayaran FROM pembayaran WHERE tahun_ajaran = :tahun_ajaran')
             ->bind(':tahun_ajaran',$tahunAjaran+1)
             ->flatFirst();
-
     }
 
+   
 }

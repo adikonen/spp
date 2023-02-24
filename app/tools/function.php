@@ -15,9 +15,9 @@ function dd($var)
     die;
 }
 
-function getMonthOption()
+function getMonthOption($month_num = null)
 {
-    return [
+    $month = [
         '1' => 'Januari',
         '2' => 'Februari',
         '3' => 'Maret',
@@ -31,6 +31,12 @@ function getMonthOption()
         '11' => 'November',
         '12' => 'Desember',
     ];
+
+    if ($month_num === null) {
+        return $month;
+    }
+
+    return $month[$month_num];
 }
 
 function getBulanOptionFromJuly()
@@ -51,13 +57,6 @@ function getBulanOptionFromJuly()
     ];
 }
 
-/**
- * merender html di folder views/components
- */
-function component($component, $data = [])
-{
-    require "../app/views/components/$view.php";
-}
 
 function redirect($path)
 {

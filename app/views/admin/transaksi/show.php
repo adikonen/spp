@@ -5,7 +5,11 @@ $all_tahun = $data['all_tahun'];
 ?>
 <div class="d-flex justify-content-between my-2">
   <h4>Entry Transaksi</h4>
+<<<<<<< HEAD
   <button class="btn btn-warning">History Transaksi</button>
+=======
+  <a href="<?= BASE_URL?>/admin_transaksi/history/<?= e($siswa['id_siswa'])?>" class="btn btn-warning">History Transaksi</a>
+>>>>>>> 4a1e8812b35b96fa2dbab751c73955a7fbe21bc5
 </div>
 
 <div class="card">
@@ -30,12 +34,15 @@ $all_tahun = $data['all_tahun'];
           <a class="nav-link <?php if($tahun == $data['tahun_ajaran']):?>active<?php endif?>" href="<?= BASE_URL?>/admin_transaksi/show/<?= e($siswa['id_siswa'])?>/<?= e($tahun)?>"><?= e($tahun)?></a>
         </li>
         <?php endforeach;?>
+<<<<<<< HEAD
         <!-- <li class="nav-item">
           <a class="nav-link" href="#">2021</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">2022</a>
         </li> -->
+=======
+>>>>>>> 4a1e8812b35b96fa2dbab751c73955a7fbe21bc5
       </ul>
 
     </div>
