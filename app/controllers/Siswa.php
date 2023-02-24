@@ -1,29 +1,29 @@
 <?php 
 
-class Siswa 
+class Siswa extends Controller
 {
-    /**
-     * memaksa user harus login sebagai siswa ketika mengakses url dengan
-     * prefix /siswa
-     */
-    public function __construct()
+    protected function render($view, $data = [])
     {
-        Access::for(SISWA_ROLE);
+        parent::view('templates/siswa/header');
+        parent::view($view, $data);
+        parent::view('templates/siswa/footer');
     }
 
     public function index()
     {
-        $user = getLoginAccount();
-        $id = $user['id_siswa'];
-
-
-        $all_transaksi = $this->model('Siswa_model')->history($id);
-        $data = [
-            'all_transaksi' => $all_transaksi
-        ];
-
-        $this->view('',$data);
+        return $this->render('siswa/index');
     }
 
-    
+    public function history()
+    {
+        $db = new Database();
+        $user = getLoginAccount();
+        $all_transaksi = $db->query('SELECT * FROM pembayaran_transaksi_siswa_view WHERE id_pengguna = :id_pengguna')
+            ->bind(':id_pengguna',$user['id_pengguna'])
+            ->get();
+
+        $data = ['all_transaksi' => $all_transaksi];
+
+        return $this->render('siswa/history', $data);
+    }
 }
