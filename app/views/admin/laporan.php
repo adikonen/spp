@@ -12,7 +12,7 @@
         <h2>Laporan Keuangan Tahun <?= e($data['tahun'])?></h2>
         <h4>Jumlah Transaksi Telah dilakukan : <?= e($data['count_transaction'])?></h4>
     </div>
-    <div class="table-responsive">
+       <div class="table-responsive">
         <table class="table">
             <thead>
                 <tr class="text-center">
@@ -35,8 +35,7 @@
         <h4><?= e($data['annual_earning'])?></h4>
     </div>
 </body>
-</html>
-
 <script>
     document.onload(window.print())
 </script>
+</html>

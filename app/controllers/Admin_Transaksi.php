@@ -8,7 +8,7 @@ class Admin_Transaksi extends AdminController
         $all_siswa = $db->query('SELECT * FROM siswa_kelas_view')->get();
         $all_kelas = $db->query('SELECT * FROM kelas')->get();
         $all_bulan = getMonthOption();
-        
+                                                                                                        
         $data = [
             'all_siswa' => $all_siswa,
             'all_kelas' => $all_kelas,
